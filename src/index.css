@@ -8,35 +8,56 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 26% 14%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 23% 18%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 23% 18%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 192 100% 67%;
+    --primary-foreground: 220 26% 14%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 262 83% 58%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 23% 18%;
+    --muted-foreground: 215.4 16.3% 65.1%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 262 83% 58%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 192 100% 67%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Brand colors */
+    --brand-cyan: 192 100% 67%;
+    --brand-purple: 262 83% 58%;
+    --brand-pink: 322 83% 68%;
+    --brand-orange: 25 95% 60%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--brand-cyan)), hsl(var(--brand-purple)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--brand-purple)), hsl(var(--brand-pink)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--brand-orange)), hsl(var(--brand-pink)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--background)), hsl(215 27.9% 16.9%));
+    
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(var(--brand-cyan) / 0.3);
+    --shadow-card: 0 10px 30px -5px hsl(220 26% 14% / 0.3);
+    --shadow-hover: 0 20px 40px -10px hsl(var(--brand-cyan) / 0.4);
+    
+    /* Animation */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -102,4 +123,85 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+  
+  .gradient-border {
+    @apply relative before:absolute before:inset-0 before:-m-px before:rounded-[inherit] before:bg-gradient-to-r before:from-primary before:to-secondary before:p-px before:content-[''];
+  }
+  
+  .card-glow {
+    @apply shadow-lg hover:shadow-2xl transition-all duration-300;
+    box-shadow: var(--shadow-card);
+  }
+  
+  .card-glow:hover {
+    box-shadow: var(--shadow-hover);
+  }
+  
+  .btn-primary {
+    @apply relative overflow-hidden rounded-xl px-8 py-4 text-lg font-semibold text-primary-foreground transition-all duration-300;
+    background: var(--gradient-primary);
+  }
+  
+  .btn-primary:hover {
+    @apply scale-105 shadow-lg;
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .btn-secondary {
+    @apply relative overflow-hidden rounded-xl px-8 py-4 text-lg font-semibold text-secondary-foreground transition-all duration-300;
+    background: var(--gradient-secondary);
+  }
+  
+  .btn-secondary:hover {
+    @apply scale-105 shadow-lg;
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0% { box-shadow: var(--shadow-card); }
+  100% { box-shadow: var(--shadow-glow); }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
