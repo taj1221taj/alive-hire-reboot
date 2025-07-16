@@ -10,6 +10,7 @@ const LetsChatSection = () => {
       description: "Speak directly with our support team",
       action: "Start Call",
       gradient: "from-brand-cyan to-brand-purple",
+      animationDelay: "0s",
       href: "tel:+91-xxx-xxx-xxxx"
     },
     {
@@ -18,6 +19,7 @@ const LetsChatSection = () => {
       description: "Get instant help via live chat",
       action: "Start Chat",
       gradient: "from-brand-purple to-brand-pink",
+      animationDelay: "0.2s",
       href: "#chat"
     },
     {
@@ -26,22 +28,30 @@ const LetsChatSection = () => {
       description: "Send us your queries via email",
       action: "Send Email",
       gradient: "from-brand-pink to-brand-orange",
+      animationDelay: "0.4s",
       href: "mailto:support@hire22.ai"
     }
   ]
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-card to-background">
-      <div className="container mx-auto">
+    <section className="relative py-20 px-4 bg-gradient-to-br from-card to-background overflow-hidden">
+      {/* Animated dot texture background */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 bg-[radial-gradient(circle,_black_1px,_transparent_1px)] bg-[size:20px_20px] animate-pulse"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle,_white_0.5px,_transparent_0.5px)] bg-[size:15px_15px] animate-pulse" style={{ animationDelay: "0.5s" }}></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle,_black_0.5px,_transparent_0.5px)] bg-[size:25px_25px] animate-pulse" style={{ animationDelay: "1s" }}></div>
+      </div>
+      
+      <div className="container mx-auto relative z-10">
         <div className="text-center mb-16">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <Headphones className="w-8 h-8 text-primary" />
+            <Headphones className="w-8 h-8 text-primary animate-bounce" />
             <h2 className="text-4xl md:text-5xl font-bold gradient-text">
               Let's Chat
             </h2>
           </div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Need help? Our customer care team is here to assist you. Choose your preferred way to connect with us.
+            Got questions? We've got answers. Connect with us instantly.
           </p>
         </div>
 
@@ -49,11 +59,14 @@ const LetsChatSection = () => {
           {supportOptions.map((option, index) => (
             <Card 
               key={index} 
-              className="card-glow hover:scale-105 transition-all duration-300 animate-slide-up group"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="card-glow hover:scale-105 transition-all duration-500 animate-slide-up group relative overflow-hidden"
+              style={{ animationDelay: option.animationDelay }}
             >
-              <CardContent className="p-8 text-center">
-                <div className={`w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br ${option.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+              {/* Dynamic color overlay */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${option.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
+              
+              <CardContent className="p-8 text-center relative z-10">
+                <div className={`w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br ${option.gradient} flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 animate-glow`}>
                   <div className="text-white">
                     {option.icon}
                   </div>
@@ -65,7 +78,7 @@ const LetsChatSection = () => {
                   {option.description}
                 </p>
                 <Button 
-                  className={`btn-primary bg-gradient-to-r ${option.gradient} hover:opacity-90 transition-opacity`}
+                  className={`btn-primary bg-gradient-to-r ${option.gradient} hover:opacity-90 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl`}
                   onClick={() => window.open(option.href, '_blank')}
                 >
                   {option.action}
@@ -77,20 +90,20 @@ const LetsChatSection = () => {
 
         {/* Support Hours */}
         <div className="text-center">
-          <Card className="max-w-md mx-auto card-glow">
+          <Card className="max-w-md mx-auto card-glow animate-fade-in">
             <CardContent className="p-6">
               <div className="flex items-center justify-center space-x-2 mb-4">
                 <Clock className="w-6 h-6 text-primary" />
-                <h3 className="text-lg font-semibold text-foreground">Support Hours</h3>
+                <h3 className="text-lg font-semibold text-foreground">Always Available</h3>
               </div>
               <div className="space-y-2 text-muted-foreground">
-                <p>Monday - Friday: 9:00 AM - 7:00 PM IST</p>
-                <p>Saturday: 10:00 AM - 4:00 PM IST</p>
-                <p>Sunday: Closed</p>
+                <p>24/7 Chat Support</p>
+                <p>Email: Typically under 2 hours</p>
+                <p>Phone: Mon-Fri 9AM-7PM IST</p>
               </div>
               <div className="mt-4 p-3 bg-primary/10 rounded-lg">
                 <p className="text-sm text-primary font-medium">
-                  Average response time: Under 2 hours
+                  We're here when you need us most
                 </p>
               </div>
             </CardContent>

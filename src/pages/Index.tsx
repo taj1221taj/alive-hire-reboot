@@ -1,10 +1,6 @@
 import Navbar from "@/components/Navbar"
 import HeroSection from "@/components/HeroSection"
-import ProblemSection from "@/components/ProblemSection"
-import JourneySection from "@/components/JourneySection"
-import InnovationLabSection from "@/components/InnovationLabSection"
-import ImpactSection from "@/components/ImpactSection"
-import VisionSection from "@/components/VisionSection"
+import OurStorySection from "@/components/OurStorySection"
 import LetsChatSection from "@/components/LetsChatSection"
 import Footer from "@/components/Footer"
 
@@ -13,11 +9,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      <ProblemSection />
-      <JourneySection />
-      <InnovationLabSection />
-      <ImpactSection />
-      <VisionSection />
+      <OurStorySection />
       <LetsChatSection />
       <Footer />
     </div>
